@@ -6,8 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        "carrot":"#FF785B"
-      }
+        "carrot":"#FF785B",
+        "butter":"#FFEA74"
+      },
     },
   },
   plugins: [],

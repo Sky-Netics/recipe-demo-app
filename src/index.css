@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-
+html{
+  scroll-behavior: smooth;
+}
 code {  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
+}
+
+@layer components{
+  .box {
+    @apply mx-auto w-64 h-52 flex items-center justify-center rounded;
+  }
+  .recipes-topic{
+    @apply text-3xl font-bold text-center;
+  }
+  .recipes{
+    @apply font-extrabold tracking-wider;
+  }
 }
