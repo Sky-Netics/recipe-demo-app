@@ -17,7 +17,7 @@ const comments = [
 
 const CarouselCommentBox: React.FC = () => {
   return (
-    <div className="w-9/12 mr-5 mb-[100px] mt-4 p-4 rounded-lg">
+    <div className="w-9/12 mr-5 mb-[100px] mt-4 p-4 rounded-lg max-md:px-0 max-md:w-11/12 ">
       <Swiper
         modules={[Navigation, Pagination, A11y, Autoplay]} // Add Autoplay module
         spaceBetween={20}
@@ -27,13 +27,13 @@ const CarouselCommentBox: React.FC = () => {
         className="w-full"
       >
         {comments.map((comment) => (
-          <SwiperSlide key={comment.id} className="p-4 flex flex-col justify-center items-center rounded-md h-[300px]"> {/* Specify height */}
+          <SwiperSlide key={comment.id} className="p-4 flex flex-col justify-center items-center rounded-md h-[300px] "> {/* Specify height */}
 
             <div className="flex justify-center mb-10">
               <StarRating starsCount={comment.rate} style={"text-[35px] px-4"} />
             </div>
 
-            <p className="text-center text-[18px] px-[200px] leading-snug font-light">{comment.text}</p> {/* Center text */}
+            <p className="text-center text-[18px] px-[200px] leading-snug font-light max-lg:px-[100px] max-md:px-[50px]">{comment.text}</p> {/* Center text */}
 
             <div className="flex items-center justify-center mt-8  ">
               <img src={comment.image} alt='Profile-picture' className="w-16 h-16 rounded-full mb-2 mr-5" /> {/* Optional: Add margin-bottom for spacing */}

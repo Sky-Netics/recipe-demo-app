@@ -32,7 +32,7 @@ const Introduction = () => {
                     </p>
                 </div>
 
-                <div className="w-4/12 bg-[#ffea74] rounded-xl max-md:w-8/12">
+                <div className="w-4/12 bg-[#ffea74] rounded-xl flex justify-center max-md:w-8/12">
                     <img src={Food2} alt="food-image" className='w-[380px]' />
                 </div>
             </div>
