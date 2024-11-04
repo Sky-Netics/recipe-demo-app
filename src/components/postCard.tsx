@@ -1,7 +1,6 @@
-import styles from './postCard.module.css'
 import { MdOutlineAccessTime } from "react-icons/md";
 import { PiCookingPot } from "react-icons/pi";
-import StarRating from '../Stars/stars';
+import StarRating from './stars';
 
 
 
@@ -16,7 +15,8 @@ type Props = {
 const PostCard = ({ imageUrl, title, minutes, servingsCount, typeFood }: Props) => {
     return (
 
-        <div className={`${styles.boxShadow} w-[300px] h-[410px] p-3 mx-3 mb-8 cursor-pointer`}>
+        <div className="w-[300px] h-[410px] p-3 mx-3 mb-8 cursor-pointer rounded-sm"
+        style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}}>
 
             <img src={imageUrl} alt={title} className="w-full h-[200px] rounded object-none" />
 

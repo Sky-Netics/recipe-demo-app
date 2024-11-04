@@ -1,14 +1,18 @@
 import './App.css';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import HomePage from './pages/homePage';
+import { useRoutes, BrowserRouter, Routes } from 'react-router-dom';
+// import HomePage from './pages/homePage';
+import Navbar from './components/navbar';
+import routes from './Routes/Routes';
 
 function App() {
+  // useRoutes must be used within a BrowserRouter context
+  const router = useRoutes(routes);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route Component={HomePage} path='/' />
-      </Routes>
-    </BrowserRouter>
+      <div className='App'>
+        <Navbar />
+        {router}
+      </div>
   );
 }
 

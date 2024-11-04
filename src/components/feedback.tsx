@@ -1,5 +1,4 @@
-import StarRating from "../Stars/stars";
-import CarouselCommentBox from '../CarouselCommentBox/carouselCommentBox'
+import CarouselCommentBox from './carouselCommentBox'
 
 const Feedback = () => {
 

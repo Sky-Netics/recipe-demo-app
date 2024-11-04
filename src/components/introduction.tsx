@@ -1,5 +1,5 @@
-import Food1 from '../../assets/Introduction/food1.png'
-import Food2 from '../../assets/Introduction/food2.png'
+import Food1 from '../assets/Introduction/food1.png'
+import Food2 from '../assets/Introduction/food2.png'
 
 const Introduction = () => {
     return (

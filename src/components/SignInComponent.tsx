@@ -1,0 +1,107 @@
+import { Link } from 'react-router-dom'
+import FoodImage from '../assets/SignUp-SignIn/signUp-signIn.webp'
+import Logo from '../assets/logo.png'
+import { useState } from 'react'
+
+type UserData = {
+    username: string,
+    password: string
+}
+
+const SignInComponent = () =>{
+
+    const [username, setUsername] =useState('')
+    const [password, setPassword] = useState('')
+
+
+    function PostData (){
+
+            const apiUrl = 'http://api.recipeapp.soroushsalari.com//auth/login'
+
+            const data: UserData = {
+                username,
+                password
+            }
+
+            console.log(data)
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error('Network response was not ok: ' + response.statusText + '. Response: ' + text);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+    
+                const token = data.access_token;
+                    if (token) {
+                    localStorage.setItem('token-signIn', token);
+                    console.log('Token saved in session storage');
+                } else {
+                    console.log('Token not found in response');
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        
+    }
+
+
+    return(
+        <div className="flex w-6/12 h-[500px] rounded-xl fixed max-lg:flex-col  max-lg:w-10/12">
+            
+                <form className="w-6/12 gap-10  bg-white rounded-tl-xl rounded-bl-xl px-10 py-7 max-lg:w-full max-lg:rounded-tr-xl max-lg:rounded-br-xl">
+                   
+                   <img src={Logo} alt="Logo" className="w-[80px] mx-auto mb-10"/>
+
+                   
+                    <label htmlFor="username" className="text-[14px] font-semibold">Username</label><br />
+                    <input 
+                    type="text"  
+                    id="username" 
+                    className="border-2 border-gray-400 rounded-lg w-full h-[35px] px-2 py-6  mb-5"
+                    onChange={(e)=>setUsername((e.target as any).value)}
+                    />
+                    <br />
+
+                    <label htmlFor="password" className="text-[14px] font-semibold ">Password</label><br />
+                    <input 
+                    type="password" 
+                    id="password" 
+                    className="border-2 border-gray-400 rounded-lg w-full h-[35px] px-2 py-6 mb-3"
+                    onChange={(e)=>setPassword((e.target as any).value)}
+                    />
+                    <br />                   
+
+                    <button 
+                    className="bg-carrot text-white w-full py-4 rounded-lg text-[14px] font-semibold mt-4"
+                    onClick={(e)=>{
+                        e.preventDefault()
+                        PostData()
+                    }}
+                    >Login</button>
+                    <p className="text-center text-[14px] font-medium mt-7 text-[#333]">Already have an account?<Link to={'/sign-up'} className="text-carrot underline ml-1">Login</Link></p>
+
+                </form>
+           
+
+            <div className="w-6/12 max-lg:hidden">
+             <img src={FoodImage} alt="Food-image" className=" h-full w-full object-fit rounded-tr-xl rounded-br-xl"/>
+            </div>
+            
+        </div>
+    )
+}
+
+export default SignInComponent

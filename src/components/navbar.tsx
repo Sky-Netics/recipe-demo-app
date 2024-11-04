@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from '../../assets/logo.png'
+import Logo from '../assets/logo.png'
 
 const Navbar = () => {
     return (
@@ -18,11 +18,11 @@ const Navbar = () => {
             </div>
             <div className="flex gap-5">
                 <div>
-                    <Link className="underline hover:text-carrot" to={"/"} aria-label="Register">Register</Link>
+                    <Link className="underline hover:text-carrot" to={"/sign-up"} aria-label="Register">Register</Link>
                 </div>
 
                 <div>
-                    <Link className="bg-carrot px-14 py-3 rounded-3xl shadow text-white" to={"/"} aria-label="Login">Login</Link>
+                    <Link className="bg-carrot px-14 py-3 rounded-3xl shadow text-white" to={"/sign-in"} aria-label="Login">Login</Link>
                 </div>
             </div>
         </div>

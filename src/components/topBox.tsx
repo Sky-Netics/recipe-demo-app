@@ -1,4 +1,4 @@
-import FoodPlate from '../../assets/FoodPlate.png'
+import FoodPlate from '../assets/FoodPlate.png'
 
 const TopBox = () => {
     return (

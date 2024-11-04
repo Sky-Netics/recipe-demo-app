@@ -1,14 +1,14 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import PostCard from "../PostCard/postCard";
-import Food1 from '../../assets/Recipes-image/food1.webp'
-import Food2 from '../../assets/Recipes-image/food2.webp'
-import Food3 from '../../assets/Recipes-image/food3.webp'
-import Food4 from '../../assets/Recipes-image/food4.webp'
-import Food5 from '../../assets/Recipes-image/food5.webp'
-import Food6 from '../../assets/Recipes-image/food6.webp'
-import Food7 from '../../assets/Recipes-image/food7.webp'
-import Food8 from '../../assets/Recipes-image/food8.webp'
+import PostCard from "./postCard";
+import Food1 from '../assets/Recipes-image/food1.webp'
+import Food2 from '../assets/Recipes-image/food2.webp'
+import Food3 from '../assets/Recipes-image/food3.webp'
+import Food4 from '../assets/Recipes-image/food4.webp'
+import Food5 from '../assets/Recipes-image/food5.webp'
+import Food6 from '../assets/Recipes-image/food6.webp'
+import Food7 from '../assets/Recipes-image/food7.webp'
+import Food8 from '../assets/Recipes-image/food8.webp'
 
 
 
