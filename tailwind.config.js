@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       colors:{
         "carrot":"#FF785B",
-        "butter":"#FFEA74"
+        "butter":"#FFEA74",
+        "pureRed":"#FF0000",
       },
     },
   },

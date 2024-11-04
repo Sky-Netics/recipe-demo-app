@@ -1,43 +1,46 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import DashboardNavbar from "../components/dashboardNavbar";
 import Star from "../components/star";
+import DashboardNavbar from "../components/dashboardNavbar";
 
 
-const Dashboard = () => {
-    const [recipe,setRecipe] = useState([{},{},{},{}])
+const FavoriteRecipes = () => {
+    const [recipe,setRecipe] = useState([{},{},{},{},{},{},{},{}])
 
-
-    return (
+    return ( 
         <>
             <DashboardNavbar />
             <div className="xl:ml-60">
                 <div className="p-8">
-                    <div className="flex justify-between items-center my-8">
-                        <div>
-                            <p>Total app users</p>
-                            <div className="w-48 h-20 bg-gray-200 animate-pulse rounded"></div>
+                    <div className="flex gap-1 sm:gap-6 md:gap-10 items-center my-8">
+                        <div className="flex items-center gap-2 border-2 rounded h-10 w-72">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-gray-400 size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                            <input className="w-full" type="text" placeholder="Search by name, ingredient"/>
                         </div>
-                        <div className="sm:block hidden">
-                            <p>Recipes</p>
-                            <div className="w-48 h-20 bg-gray-200 animate-pulse rounded"></div>
+                        <div className="flex px-2 items-center gap-2 border-2 rounded h-10 w-28">
+                            <input className="w-full" type="text" placeholder="Ingredient"/>
+                            <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 0H0L2.85714 4L6 0Z" fill="#333333"/>
+                            </svg>
                         </div>
-                        <div className="md:block hidden">
-                            <p>My favourites</p>
-                            <div className="w-48 h-20 bg-gray-200 animate-pulse rounded"></div>
+                        <div className="flex px-2 items-center gap-2 border-2 rounded h-10 w-24">
+                            <input className="w-full" type="text" placeholder="Category"/>
+                            <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 0H0L2.85714 4L6 0Z" fill="#333333"/>
+                            </svg>
                         </div>
-                        <div>
-                            <button className="bg-carrot text-white py-1 px-2 rounded-xl flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                Create new recipe
-                            </button>
+                        <div className="hidden sm:flex px-2 items-center gap-2 border-2 rounded h-10 w-24 ">
+                            <input className="w-full" type="text" placeholder="Country"/>
+                            <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 0H0L2.85714 4L6 0Z" fill="#333333"/>
+                            </svg>
                         </div>
                     </div>
                     <div>
-                        <p className="font-extrabold">Popular Recipes</p>
+                        <p className="font-extrabold">Favorites</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8">
                             {recipe.map((p,i)=>{
                                 return (
@@ -79,4 +82,4 @@ const Dashboard = () => {
      );
 }
  
-export default Dashboard;
+export default FavoriteRecipes;

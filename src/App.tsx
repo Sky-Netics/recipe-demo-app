@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import AllRecipes from './pages/allRecipes';
 import MyRecipes from './pages/myRecipes';
+import FavoriteRecipes from './pages/favoriteRecipes';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route Component={Dashboard} path='/dashboard/' />
         <Route Component={AllRecipes} path='/dashboard/all-recipes/' />
         <Route Component={MyRecipes} path='/dashboard/my-recipes/' />
+        <Route Component={FavoriteRecipes} path='/dashboard/favorites/' />
       </Routes>
     </BrowserRouter>
   );

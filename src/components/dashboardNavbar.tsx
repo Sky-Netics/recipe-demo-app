@@ -1,9 +1,37 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const DashboardNavbar = () => {
+    const redirect = useNavigate();
+    
+    const [username,setUsername] = useState("");
+
     const rightBar = useRef<HTMLDivElement|null>(null);
     const placeHolder = useRef<HTMLDivElement|null>(null);
+
+
+    useEffect(()=>{
+        const fecthUser = async ()=>{
+            const response = await fetch(`http://3.66.216.91/users/me/${localStorage.getItem("id")}`,{
+                method:"GET",
+                headers:{
+                'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('access_token')}`
+            }
+            })
+            if (response.status === 200){
+                const result = await response.json();
+                setUsername(result.username)
+            }
+        }
+        if (localStorage.getItem("id") !== null){
+            fecthUser();
+        }else{
+            redirect("/login")
+        }
+    },[])
+
 
     const openBar = ()=>{
         if (rightBar.current !== null ){
@@ -51,7 +79,7 @@ const DashboardNavbar = () => {
                         </svg>
                     </div>
                     <div className="flex items-center">
-                        <p className="font-extrabold">Welcome, User102102129</p>
+                        <p className="font-extrabold">Welcome, {username}</p>
                     </div>
                     <div className="flex items-center">
                         <button className="border border-black py-1.5 px-6 rounded-2xl">Logout</button>
