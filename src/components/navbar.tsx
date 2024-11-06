@@ -18,8 +18,8 @@ const Navbar = () => {
                 <div className="cursor-pointer hover:text-carrot"><Link to={"/#contactus"}>ContactUs</Link></div>
             </div>
             <div className="flex gap-5">
-                <div><Link className="underline hover:text-carrot" to={"/"} aria-label="Register">Register</Link></div>
-                <div><Link className="bg-carrot px-5 py-2 rounded-3xl text-zinc-50" to={"/"} aria-label="Login">Login</Link></div>
+                <div><Link className="underline hover:text-carrot" to={"/register"} aria-label="Register">Register</Link></div>
+                <div><Link className="bg-carrot px-5 py-2 rounded-3xl text-zinc-50" to={"/login"} aria-label="Login">Login</Link></div>
             </div>
         </div>
      );

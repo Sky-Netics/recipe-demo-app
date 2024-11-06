@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 const DashboardNavbar = () => {
     const redirect = useNavigate();
+
+    const route:string = window.location.href.split("?")[1]
+    const domain:string = 'http://api.recipeapp.soroushsalari.com'
     
     const [username,setUsername] = useState("");
 
@@ -12,8 +15,10 @@ const DashboardNavbar = () => {
 
 
     useEffect(()=>{
+        document.querySelector(`[data-name=${route}]`)?.classList.add("active");
+
         const fecthUser = async ()=>{
-            const response = await fetch(`http://3.66.216.91/users/me/${localStorage.getItem("id")}`,{
+            const response = await fetch(`${domain}/users/me`,{
                 method:"GET",
                 headers:{
                 'Content-Type': 'application/json',
@@ -47,29 +52,35 @@ const DashboardNavbar = () => {
         placeHolder.current?.classList.add("hidden");
     }
 
+    const logout = ()=>{
+        localStorage.removeItem("id")
+        localStorage.removeItem("auth_token")
+        redirect('/')
+    }
+
     return (<>
             <div>
-                <div ref={rightBar} className="xl:left-0 -left-60 absolute transition-all duration-300 w-60 h-screen bg-butter z-50 p-7">
+                <div ref={rightBar} className="xl:left-0 -left-60 fixed transition-all duration-300 w-60 h-screen bg-butter z-50 p-7">
                     <div className="flex justify-center"><img src="/images/logo.png" alt="logo" /></div>
                     <div className="text-center">
                         <p className="text-gray-500 my-6">DASHBOARD</p>
-                        <div className="text-left ml-20"><Link className="active" to="/dashboard">Dashboard</Link></div>
+                        <div className="text-left ml-20"><Link data-name="dashboard" to="/dashboard?dashboard">Dashboard</Link></div>
                     </div>
                     <div className="text-center">
                         <p className="text-gray-500 my-6">RECIPES</p>
-                        <div className="text-left ml-20 mb-6"><Link to="">All Recipes</Link></div>
-                        <div className="text-left ml-20"><Link to="">My Recipes</Link></div>
+                        <div className="text-left ml-20 mb-6 w-36"><Link data-name="all-recipes" to="/dashboard/all-recipes?all-recipes">All Recipes</Link></div>
+                        <div className="text-left ml-20 w-36"><Link data-name="my-recipes" to="/dashboard/my-recipes?my-recipes">My Recipes</Link></div>
                     </div>
                     <div className="text-center">
                         <p className="text-gray-500 my-6">BOOKMARKS</p>
-                        <div className="text-left ml-20"><Link to="">Favourites</Link></div>
+                        <div className="text-left ml-20"><Link data-name="favorite" to="/dashboard/favorite?favorite">favorites</Link></div>
                     </div>
                     <div className="text-center">
                         <p className="text-gray-500 my-6">PROFILE</p>
-                        <div className="text-left ml-20"><Link to="">Account</Link></div>
+                        <div className="text-left ml-20"><Link data-name="account" to="/dashboard/account?account">Account</Link></div>
                     </div>
                 </div>
-                <div onClick={closeBar} ref={placeHolder} className="hidden absolute w-screen h-screen right-0 top-0 z-40 back-blur"></div>
+                <div onClick={closeBar} ref={placeHolder} className="hidden fixed w-screen h-screen right-0 top-0 z-40 back-blur"></div>
             </div>
             <div>
                 <div className="h-16 w-full flex justify-between items-centerc px-5 xl:pl-64">
@@ -82,7 +93,7 @@ const DashboardNavbar = () => {
                         <p className="font-extrabold">Welcome, {username}</p>
                     </div>
                     <div className="flex items-center">
-                        <button className="border border-black py-1.5 px-6 rounded-2xl">Logout</button>
+                        <button onClick={logout} className="border border-black py-1.5 px-6 rounded-2xl">Logout</button>
                     </div>
                 </div>
             </div>

@@ -26,6 +26,9 @@ code {  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     @apply w-full border-2 border-gray-400 rounded-lg h-9 focus:outline-none;
   }
   .active{
-    @apply bg-white text-carrot px-6 py-2 rounded-lg ;
+    @apply bg-white text-carrot w-full px-6 py-2 rounded-lg ;
+  }
+  .active-header{
+    @apply border-b-4 border-carrot;
   }
 }
