@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import FoodImage from '../assets/SignUp-SignIn/signUp-signIn.webp'
-import Logo from '../assets/logo.png'
+import FoodImage from '../../../assets/SignUp-SignIn/signUp-signIn.webp'
+import Logo from '../../../assets/logo.png'
 import { useState } from 'react'
 
 type UserData = {
@@ -43,12 +43,20 @@ const SignInComponent = () =>{
             .then(data => {
                 console.log('Success:', data);
     
-                const token = data.access_token;
-                    if (token) {
-                    localStorage.setItem('token-signIn', token);
-                    console.log('Token saved in session storage');
+                const accessToken = data.access_token;
+                    if (accessToken) {
+                    localStorage.setItem('access-token', accessToken);
+                    console.log('Access Token saved in local storage');
                 } else {
-                    console.log('Token not found in response');
+                    console.log('Access Token not found in response');
+                }
+
+                const refreshToken = data.refresh_token
+                if(refreshToken){
+                    localStorage.setItem('refresh-token', refreshToken)
+                    console.log('Refresh token saved in local storage')
+                }else{
+                    console.log('Refresh Token not found in response');
                 }
             })
             .catch(error => {

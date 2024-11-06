@@ -1,14 +1,15 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import FoodImage from "../assets/SignUp-SignIn/signUp-signIn.webp"
-import Logo from '../assets/logo.png'
+import FoodImage from "../../../assets/SignUp-SignIn/signUp-signIn.webp"
+import Logo from '../../../assets/logo.png'
 
 type UserData = {
     username: string, 
     email: string, 
     password: string, 
     password_confirmation: string, 
-    image_url: string
+    image_url: string,
+    role: string
 }
 
 const SignUpComponent = ()=>{
@@ -22,14 +23,15 @@ const SignUpComponent = ()=>{
 
     function postData(){
 
-        const apiUrl = 'http://api.recipeapp.soroushsalari.com//auth/signup'
+        const apiUrl = 'http://api.recipeapp.soroushsalari.com/auth/signup'
 
         const data: UserData={
-            username: username,
+            username,
             email,
             password,
             password_confirmation: passwordConfirmation,
-            image_url: imageUrl || 'string'
+            image_url: imageUrl || 'string',
+            role: 'user'
         }
 
         console.log(data)
@@ -52,13 +54,21 @@ const SignUpComponent = ()=>{
         .then(data => {
             console.log('Success:', data);
 
-            const token = data.access_token;
-                if (token) {
-                localStorage.setItem('token signUp', token);
-                console.log('Token saved in session storage');
+            const accessToken = data.access_token;
+                if (accessToken) {
+                localStorage.setItem('access-token', accessToken);
+                console.log('Access Token saved in session storage');
             } else {
-                console.log('Token not found in response');
+                console.log('Access Token not found in response');
             }
+
+            const refreshToken = data.refresh_token
+                if(refreshToken){
+                    localStorage.setItem('refresh-token', refreshToken)
+                    console.log('Refresh token saved in local storage')
+                }else{
+                    console.log('Refresh Token not found in response');
+                }
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

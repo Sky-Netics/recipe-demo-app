@@ -21,7 +21,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="bg-[#FFEA74] pt-[250px] pb-[10px] flex max-xl:flex-col max-xl:items-center">
+            <div className="bg-yellow pt-[250px] pb-[10px] flex max-xl:flex-col max-xl:items-center">
 
                 <div className="w-4/12 flex flex-col items-center text-center">
                     <h2 className="text-[26px] mb-5">Contacts Us</h2>
@@ -60,7 +60,7 @@ const Footer = () => {
 
             </div>
 
-            <div className="text-center bg-[#FFEA74] pb-[120px] max-xl:pb-[70px] max-xl:pt-10">
+            <div className="text-center bg-yellow pb-[120px] max-xl:pb-[70px] max-xl:pt-10">
                 <p className="text-[16px]">2024 Tastebite. All Rights reserved.</p>
             </div>
 

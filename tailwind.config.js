@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "carrot": "#FF785B"
+        "carrot": "#FF785B",
+        "yellow": "#ffea74"
       },
       boxShadow: {
         'custom-light': '0 4px 8px rgba(0, 0, 0, 0.1)', // Light shadow

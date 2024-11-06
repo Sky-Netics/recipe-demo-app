@@ -9,7 +9,7 @@ const StarRating: React.FC<StarRatingProps> = ({ starsCount, style }) => {
     return (
         <div className="flex space-x-1">
             {[...Array(starsCount)].map((_, index) => (
-                <span key={index} className={`text-[#FFEA74]  ${style}`}>
+                <span key={index} className={`text-yellow  ${style}`}>
                     ★
                 </span>
             ))}

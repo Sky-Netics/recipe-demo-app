@@ -1,5 +1,5 @@
-import Food1 from '../assets/Introduction/food1.png'
-import Food2 from '../assets/Introduction/food2.png'
+import Food1 from '../../../assets/Introduction/food1.png'
+import Food2 from '../../../assets/Introduction/food2.png'
 
 const Introduction = () => {
     return (
@@ -32,11 +32,10 @@ const Introduction = () => {
                     </p>
                 </div>
 
-                <div className="w-4/12 bg-[#ffea74] rounded-xl flex justify-center max-md:w-8/12">
+                <div className="w-4/12 bg-yellow rounded-xl flex justify-center max-md:w-8/12">
                     <img src={Food2} alt="food-image" className='w-[380px]' />
                 </div>
             </div>
-
 
         </div>
     )

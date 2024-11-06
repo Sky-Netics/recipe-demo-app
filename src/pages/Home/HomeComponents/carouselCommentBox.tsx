@@ -4,10 +4,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Navigation, Pagination, A11y, Autoplay } from "swiper/modules";
 
-import Profile1 from '../assets/Profiles/profile1.webp'
-import Profile2 from '../assets/Profiles/profile2.webp'
-import Profile3 from '../assets/Profiles/profile3.webp'
-import StarRating from "./stars";
+import Profile1 from '../../../assets/Profiles/profile1.webp'
+import Profile2 from '../../../assets/Profiles/profile2.webp'
+import Profile3 from '../../../assets/Profiles/profile3.webp'
+import StarRating from "../../../components/stars";
 
 const comments = [
   { id: 1, user: "Emily", text: "I think we've been using Taste Bite for a while now and it's an awesome app.It's very easy to use and you can save recipes in it. I think the best thing about this app is that it has alot of categories,so you are ablee to find the perfect recipe for any occassion.", image: Profile1, rate: 2 },

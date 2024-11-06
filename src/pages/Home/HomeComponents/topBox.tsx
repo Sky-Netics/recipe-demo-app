@@ -1,10 +1,10 @@
-import FoodPlate from '../assets/FoodPlate.png'
+import FoodPlate from '../../../assets/FoodPlate.png'
 
 const TopBox = () => {
     return (
 
         <div className="container mx-auto h-[600px] flex justify-center items-center max-md:my-14">
-            <div className="w-11/12 bg-[#FFEA74] py-2 rounded-2xl flex max-md:flex-col-reverse max-md:items-center">
+            <div className="w-11/12 bg-yellow py-2 rounded-2xl flex max-md:flex-col-reverse max-md:items-center">
 
                 <div className="w-6/12 flex flex-col justify-center py-10 px-8 max-md:w-full max-md:items-center">
                     <h1 className="text-[48px] font-extrabold max-xl:text-[38px] max-md:text-center">Cook, Save and Share</h1>
