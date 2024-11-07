@@ -69,9 +69,9 @@ const Register = () => {
         console.log(response)
         if (response.status === 201){
             let result = await response.json()
-            localStorage.setItem("id",result.user.id)
             localStorage.setItem("access_token",result.access_token)
-            redirect("/dashboard")
+            localStorage.setItem("refresh_token",result.refresh_token)
+            redirect("/dashboard?dashboard")
         }
     }
 

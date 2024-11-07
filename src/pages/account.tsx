@@ -1,6 +1,14 @@
+import { useEffect, useState } from "react";
 import DashboardNavbar from "../components/dashboardNavbar";
 
 const Account = () => {
+    const [disable,setDisable] = useState(true);
+
+    const [info,setInfo] = useState({
+        username:'',
+        email:""
+    })
+
     return (<> 
         <div className="w-screen h-screen bg-gray-300">
             <DashboardNavbar />
@@ -21,7 +29,7 @@ const Account = () => {
                         <div className="mt-2"><input className="file:bg-blue-600 file:text-white file:border-none file:px-8 file:py-2 file:rounded-lg" type="file" accept="image/*" id="profile" name="profile" /></div>
                     </div>
                     <div className="mt-16 md:w-1/2">
-                        <button className="bg-carrot text-white w-full py-2 rounded-2xl">Save Changes</button>
+                        <button disabled={disable} style={disable ? {opacity:0.5} : {opacity:1}} className="bg-carrot text-white w-full py-2 rounded-2xl">Save Changes</button>
                     </div>
                 </div>
             </div>

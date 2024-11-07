@@ -28,14 +28,29 @@ const DashboardNavbar = () => {
             if (response.status === 200){
                 const result = await response.json();
                 setUsername(result.username)
+            }else{
+                const response = await fetch(`${domain}/auth/refresh`,{
+                    method:"POST",
+                    headers:{
+                    'Content-Type': 'application/json',
+                    "Authorization":`Bearer ${localStorage.getItem('access_token')}`
+                    },
+                    body : JSON.stringify({"refresh_token":localStorage.getItem("refresh_token")})
+                })
+                if(response.status === 200){
+                    let result = await response.json()
+                    localStorage.setItem("access_token",result.access_token);
+                    localStorage.setItem("refresh_token",result.refresh_token);
+                }else
+                    redirect("/login")
             }
         }
-        if (localStorage.getItem("id") !== null){
+        if (localStorage.getItem("access_token") !== null){
             fecthUser();
         }else{
             redirect("/login")
         }
-    },[])
+    },[redirect,route])
 
 
     const openBar = ()=>{
@@ -58,10 +73,11 @@ const DashboardNavbar = () => {
         redirect('/')
     }
 
+
     return (<>
             <div>
                 <div ref={rightBar} className="xl:left-0 -left-60 fixed transition-all duration-300 w-60 h-screen bg-butter z-50 p-7">
-                    <div className="flex justify-center"><img src="/images/logo.png" alt="logo" /></div>
+                    <div className="flex justify-center"><Link to={"/"}><img src="/images/logo.png" alt="logo" /></Link></div>
                     <div className="text-center">
                         <p className="text-gray-500 my-6">DASHBOARD</p>
                         <div className="text-left ml-20"><Link data-name="dashboard" to="/dashboard?dashboard">Dashboard</Link></div>
