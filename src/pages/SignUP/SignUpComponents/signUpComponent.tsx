@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import FoodImage from "../../../assets/SignUp-SignIn/signUp-signIn.webp"
 import Logo from '../../../assets/logo.png'
+import AuthContext from "../../../context/authContext"
+
 
 type UserData = {
     username: string, 
@@ -14,34 +16,38 @@ type UserData = {
 
 const SignUpComponent = ()=>{
 
+    const authContext = useContext(AuthContext)
+    console.log(authContext)
+
     const [username, setUsername] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [passwordConfirmation, setPasswordConfirmation] = useState<string>('')
-    const [imageUrl, setImageUrl] = useState<string>('')
+    const [imageUrl, setImageUrl] = useState<string>('string')
+  
     
 
     function postData(){
 
         const apiUrl = 'http://api.recipeapp.soroushsalari.com/auth/signup'
 
-        const data: UserData={
+        const userData: UserData={
             username,
             email,
             password,
             password_confirmation: passwordConfirmation,
-            image_url: imageUrl || 'string',
+            image_url: imageUrl || '',
             role: 'user'
         }
 
-        console.log(data)
+        console.log(userData)
 
         fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(userData)
         })
         .then((response) => {
             if (!response.ok) {
@@ -57,10 +63,12 @@ const SignUpComponent = ()=>{
             const accessToken = data.access_token;
                 if (accessToken) {
                 localStorage.setItem('access-token', accessToken);
-                console.log('Access Token saved in session storage');
+                console.log('Access Token saved in local storage');
             } else {
                 console.log('Access Token not found in response');
             }
+
+            authContext.login(data.user ,data.access_token)
 
             const refreshToken = data.refresh_token
                 if(refreshToken){
@@ -69,10 +77,19 @@ const SignUpComponent = ()=>{
                 }else{
                     console.log('Refresh Token not found in response');
                 }
+
+            const id = data.user.id
+            if(id){
+                localStorage.setItem('id', id)
+                console.log('Id saved in local storage')
+            }else{
+                console.log('Id not found in response')
+            }
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-        });
+        });    
+
     }
     
 

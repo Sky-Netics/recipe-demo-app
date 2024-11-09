@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import FoodImage from '../../../assets/SignUp-SignIn/signUp-signIn.webp'
 import Logo from '../../../assets/logo.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 type UserData = {
     username: string,
@@ -10,13 +10,14 @@ type UserData = {
 
 const SignInComponent = () =>{
 
-    const [username, setUsername] =useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] =useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [accessToken, setAccessToken] = useState<string | null>()
+    const [err ,setErr] = useState<boolean>(false)
 
+    const apiUrl:string = 'http://api.recipeapp.soroushsalari.com/auth/login'  
 
     function PostData (){
-
-            const apiUrl = 'http://api.recipeapp.soroushsalari.com//auth/login'
 
             const data: UserData = {
                 username,
@@ -34,16 +35,18 @@ const SignInComponent = () =>{
             })
             .then((response) => {
                 if (!response.ok) {
+                    setErr(true)
                     return response.text().then(text => {
                         throw new Error('Network response was not ok: ' + response.statusText + '. Response: ' + text);
                     });
                 }
+                setErr(false)
                 return response.json();
             })
             .then(data => {
                 console.log('Success:', data);
     
-                const accessToken = data.access_token;
+                setAccessToken(data.access_token)
                     if (accessToken) {
                     localStorage.setItem('access-token', accessToken);
                     console.log('Access Token saved in local storage');
@@ -58,11 +61,34 @@ const SignInComponent = () =>{
                 }else{
                     console.log('Refresh Token not found in response');
                 }
+
+                const id = data.user.id
+                if(id){
+                    localStorage.setItem('id', id)
+                    console.log('Id saved in local storage')
+                }else{
+                        console.log('Id not found in response')
+                }
+
+                // setTimeout(()=>{
+                //     fetch('http://api.recipeapp.soroushsalari.com//users/me',{
+                //         method: 'GET',
+                //         headers:{
+                //             'Authorization': `Bearer ${data.access_token}`
+                //         }
+                //     })
+                //     .then(response => response.json())
+                //     .then(data => console.log(data))
+                //     .catch(error => console.error('Error:', error))
+                // }, 3000)
+
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
-            });
-        
+            });   
+            
+
+          
     }
 
 
@@ -91,6 +117,8 @@ const SignInComponent = () =>{
                     onChange={(e)=>setPassword((e.target as any).value)}
                     />
                     <br />                   
+
+                    {err? <p className='text-red-600'>Invalid username or password!</p>: null}
 
                     <button 
                     className="bg-carrot text-white w-full py-4 rounded-lg text-[14px] font-semibold mt-4"
