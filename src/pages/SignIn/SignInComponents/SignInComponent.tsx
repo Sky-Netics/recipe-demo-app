@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
+import AuthContext from '../../../context/authContext'
 import FoodImage from '../../../assets/SignUp-SignIn/signUp-signIn.webp'
 import Logo from '../../../assets/logo.png'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 type UserData = {
     username: string,
@@ -9,6 +10,9 @@ type UserData = {
 }
 
 const SignInComponent = () =>{
+
+    const authContext = useContext(AuthContext)
+    console.log(authContext)
 
     const [username, setUsername] =useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -19,19 +23,19 @@ const SignInComponent = () =>{
 
     function PostData (){
 
-            const data: UserData = {
+            const userData: UserData = {
                 username,
                 password
             }
 
-            console.log(data)
+            console.log(userData)
 
             fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(userData)
             })
             .then((response) => {
                 if (!response.ok) {
@@ -54,10 +58,13 @@ const SignInComponent = () =>{
                     console.log('Access Token not found in response');
                 }
 
+                authContext.login(data.user ,data.access_token)
+
                 const refreshToken = data.refresh_token
                 if(refreshToken){
                     localStorage.setItem('refresh-token', refreshToken)
                     console.log('Refresh token saved in local storage')
+                    window.location.href = '/dashboard'
                 }else{
                     console.log('Refresh Token not found in response');
                 }
@@ -69,18 +76,6 @@ const SignInComponent = () =>{
                 }else{
                         console.log('Id not found in response')
                 }
-
-                // setTimeout(()=>{
-                //     fetch('http://api.recipeapp.soroushsalari.com//users/me',{
-                //         method: 'GET',
-                //         headers:{
-                //             'Authorization': `Bearer ${data.access_token}`
-                //         }
-                //     })
-                //     .then(response => response.json())
-                //     .then(data => console.log(data))
-                //     .catch(error => console.error('Error:', error))
-                // }, 3000)
 
             })
             .catch(error => {

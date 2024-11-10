@@ -4,6 +4,7 @@ import Food1 from '../../../assets/Recipes-image/food1.webp'
 import Food2 from '../../../assets/Recipes-image/food2.webp'
 import Food3 from '../../../assets/Recipes-image/food3.webp'
 import Food4 from '../../../assets/Recipes-image/food4.webp'
+import { Link } from "react-router-dom";
 
 
 const DashboardMainComponent = ()=>{
@@ -44,9 +45,9 @@ const DashboardMainComponent = ()=>{
 
                     </div>      
 
-                    <button className="flex items-center w-fit text-white bg-carrot py-2 px-[20px] rounded-3xl mr-4">
+                    <Link to={'/dashboard/my-recipes/create-recipes'} className="flex items-center w-fit text-white bg-carrot py-2 px-[20px] rounded-3xl mr-4">
                         <IoAdd className="mr-2 text-[24px]"/> Create new recipe
-                    </button>
+                    </Link>
 
                 </div>
 

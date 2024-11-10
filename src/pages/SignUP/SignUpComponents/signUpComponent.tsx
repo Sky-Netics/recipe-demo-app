@@ -64,6 +64,7 @@ const SignUpComponent = ()=>{
                 if (accessToken) {
                 localStorage.setItem('access-token', accessToken);
                 console.log('Access Token saved in local storage');
+                window.location.href = '/dashboard'
             } else {
                 console.log('Access Token not found in response');
             }
