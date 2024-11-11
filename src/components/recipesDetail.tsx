@@ -2,11 +2,10 @@ import { useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import DashboardNavbar from "../components/dashboardNavbar";
-import GuideRecipes from "../components/guideRecipes";
-import VideoRecipes from "../components/videoRecipes";
+import GuideRecipes from "./guideRecipes";
+import VideoRecipes from "./videoRecipes";
 
-const AllRecipesDetail = () => {
+const RecipesDetail = () => {
     const id:string|undefined = useParams().id
 
     const [status,setStatus] = useState("guide");
@@ -34,7 +33,6 @@ const AllRecipesDetail = () => {
     }
 
     return (<>
-            <DashboardNavbar />
             <div className="xl:ml-60 flex flex-col items-center mt-5">
                 <div className="flex gap-12">
                     <p ref={guide} onClick={()=>{changeComponent("guide")}} className="cursor-pointer active-header">Step by step guide</p>
@@ -45,4 +43,4 @@ const AllRecipesDetail = () => {
     </>);
 }
  
-export default AllRecipesDetail;
+export default RecipesDetail;
