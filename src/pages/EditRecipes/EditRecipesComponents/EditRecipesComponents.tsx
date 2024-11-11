@@ -13,7 +13,7 @@ type RecipesData={
     video_link: string
 }
 
-const CreateRecipesComponent = () =>{
+const EditRecipesComponent = () => {
 
     const [title, setTitle] = useState<string>('')
     const [category, setCategory] = useState<string>('')
@@ -37,7 +37,7 @@ const CreateRecipesComponent = () =>{
         setImageUrl('https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
     }, [])
 
-    const CreateRecipe = ()=>{
+    const UpdateRecipes = ()=>{
 
         const recipesData: RecipesData = {
             title,
@@ -54,13 +54,15 @@ const CreateRecipesComponent = () =>{
 
         console.log(recipesData)
 
-        const apiUrl = 'http://api.recipeapp.soroushsalari.com/recipes/recipes'
+        const path = window.location.pathname
+        const id = path.split('/').pop();
+        const apiUrl = `http://api.recipeapp.soroushsalari.com/recipes/recipes/${id}`
         const tokenData = localStorage.getItem('access-token')
-        const token = tokenData ? JSON.parse(tokenData).token : '';
+        const token = tokenData ? JSON.parse(tokenData).token : ''
 
 
         fetch(apiUrl, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -74,6 +76,7 @@ const CreateRecipesComponent = () =>{
                     throw new Error('Network response was not ok: ' + response.statusText + '. Response: ' + text);
                 });
             }
+            window.location.href = '/dashboard/my-recipes'
             return response.json();
         })
         .then(data => {
@@ -248,9 +251,10 @@ const CreateRecipesComponent = () =>{
             </div>
 
             <div className="flex justify-end">
+                
                 <button 
                 className="mr-8 bg-carrot text-white px-4 py-1 rounded-3xl"
-                onClick={()=>CreateRecipe()}
+                onClick={()=>UpdateRecipes()}
                 >Save Changes</button>
             </div>
             
@@ -258,4 +262,4 @@ const CreateRecipesComponent = () =>{
     )
 }
 
-export default CreateRecipesComponent
+export default EditRecipesComponent

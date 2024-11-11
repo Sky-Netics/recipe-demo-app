@@ -1,18 +1,18 @@
 import DashboardMenue from "../../components/dashboardComponents/dashboardMenue"
 import DashboardNavbar from "../../components/dashboardComponents/dashboardNavbar"
-import AllRecipesComponent from "./AllRecipesComponents/AllRecipesComponent"
+import SpecificRecipesComponent from "./SpecificRecipeComponents/SpecificRecipeComponents"
 
-const AllRecipesPage = ()=>{
+const SpecificRecipesPage = ()=>{
     return(
         <div className="flex">
             <DashboardMenue/>
 
             <div className="w-full">
                 <DashboardNavbar/>
-                <AllRecipesComponent/>
+                <SpecificRecipesComponent/>
             </div>
         </div>
     )
 }
 
-export default AllRecipesPage
+export default SpecificRecipesPage

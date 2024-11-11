@@ -4,7 +4,7 @@ import AccountComponent from "./AccountComponents/AccountComponent"
 
 const AccountPage = ()=>{
     return(
-        <div className="flex">
+        <div className="flex bg-gray-300">
             <DashboardMenue/>
 
             <div className="w-full">

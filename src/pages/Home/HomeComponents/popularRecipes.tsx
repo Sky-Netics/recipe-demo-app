@@ -29,69 +29,7 @@ const PopularRecipes = () => {
 
             <div className="flex flex-wrap justify-center mt-14">
 
-                <PostCardLarge
-                    imageUrl={Food1}
-                    title="Homemade Potato Chips"
-                    minutes={20}
-                    servingsCount={4}
-                    typeFood="American"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food2}
-                    title="Tagliata Alla Fiorentina"
-                    minutes={40}
-                    servingsCount={2}
-                    typeFood="Kenyan"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food3}
-                    title="Raspberry Almond Tart"
-                    minutes={60}
-                    servingsCount={1}
-                    typeFood="Italian"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food4}
-                    title="Sweet Pumpkin Strudel"
-                    minutes={60}
-                    servingsCount={4}
-                    typeFood="Italian"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food5}
-                    title="Alder-Planked Salmon with Egg Sauce"
-                    minutes={60}
-                    servingsCount={10}
-                    typeFood="Italian"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food6}
-                    title="Accordion Potatoes"
-                    minutes={60}
-                    servingsCount={3}
-                    typeFood="Italian"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food7}
-                    title="Tangerine-Gin Fizz"
-                    minutes={10}
-                    servingsCount={4}
-                    typeFood="Italian"
-                />
-
-                <PostCardLarge
-                    imageUrl={Food8}
-                    title="5 Spice Cajun Shrimp"
-                    minutes={60}
-                    servingsCount={10}
-                    typeFood="Italian"
-                />
+                <PostCardLarge/>
 
             </div>
 

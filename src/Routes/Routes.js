@@ -7,17 +7,21 @@ import MyRecipesPage from "../pages/MyRecipes/myRecipesPage";
 import CreateRecipesPage from "../pages/CreateRecipes/CreateRecipesPage";
 import FavouritesPage from "../pages/Favourites/favouritesPage";
 import AccountPage from "../pages/Account/AcountPage";
+import SpecificRecipesPage from "../pages/SpecificRecipe/SpecificRecipesPage";
+import EditRecipesPage from "../pages/EditRecipes/EditRecipesPage";
 
 let routes = [
     { path: '/', element: <HomePage /> },
     { path: '/sign-up', element: <SignUp /> },
     { path: '/sign-in', element: <SignIn /> },
     { path: '/dashboard', element: <DashboardPage /> },
-    { path: '/dashboard/all-recipes', element: < AllRecipesPage />},
-    { path: '/dashboard/my-recipes', element: <MyRecipesPage />},
-    { path: '/dashboard/my-recipes/create-recipes', element: <CreateRecipesPage />},
-    { path: '/dashboard/favourites', element: <FavouritesPage />},
-    { path: '/dashboard/account', element: <AccountPage />},
+    { path: '/dashboard/all-recipes', element: < AllRecipesPage /> },
+    { path: '/dashboard/all-recipes/:recipesId', element: <SpecificRecipesPage /> },
+    { path: '/dashboard/my-recipes', element: <MyRecipesPage /> },
+    { path: '/dashboard/my-recipes/create-recipes', element: <CreateRecipesPage /> },
+    { path: '/dashboard/my-recipes/edit-recipes/:recipesId', element: <EditRecipesPage/>},
+    { path: '/dashboard/favourites', element: <FavouritesPage /> },
+    { path: '/dashboard/account', element: <AccountPage /> },
 ]
 
 export default routes

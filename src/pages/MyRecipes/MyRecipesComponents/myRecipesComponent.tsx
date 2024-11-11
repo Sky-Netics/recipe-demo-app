@@ -2,10 +2,6 @@ import FilterPostCard from "../../../components/dashboardComponents/filterPostCa
 import PostCardMyRecipes from "./postCardMyRecipes";
 import { IoAdd } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import Food1 from '../../../assets/Recipes-image/food1.webp'
-import Food2 from '../../../assets/Recipes-image/food2.webp'
-import Food3 from '../../../assets/Recipes-image/food3.webp'
-import Food4 from '../../../assets/Recipes-image/food4.webp'
 
 
 const MyRecipesComponent = ()=>{
@@ -31,38 +27,8 @@ const MyRecipesComponent = ()=>{
             
             <div className="flex flex-wrap">
                
-                <PostCardMyRecipes 
-                    imageUrl={Food1}
-                    title="Homemade Potato Chips"
-                    minutes={20}
-                    servingsCount={4}
-                    typeFood="American"
-                />
+                <PostCardMyRecipes />
 
-                <PostCardMyRecipes 
-                    imageUrl={Food2}
-                    title="Tagliata Alla Fiorentina"
-                    minutes={40}
-                    servingsCount={2}
-                    typeFood="Kenyan"
-                />
-
-                <PostCardMyRecipes 
-                   imageUrl={Food3}
-                   title="Raspberry Almond Tart"
-                   minutes={60}
-                   servingsCount={1}
-                   typeFood="Italian"
-                />
-
-                <PostCardMyRecipes 
-                    imageUrl={Food4}
-                    title="Sweet Pumpkin Strudel"
-                    minutes={60}
-                    servingsCount={4}
-                    typeFood="Italian"
-                />
-                
 
             </div>
             
