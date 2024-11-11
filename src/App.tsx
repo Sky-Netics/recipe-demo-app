@@ -9,8 +9,9 @@ import AllRecipes from './pages/allRecipes';
 import MyRecipes from './pages/myRecipes';
 import FavoriteRecipes from './pages/favoriteRecipes';
 import Account from './pages/account';
-import AllRecipesDetail from './pages/allRecipesDetail';
+import EditRecipes from './components/editRecipes';
 import CreateRecipes from './pages/createRecipes';
+import ErrorPage from './pages/404';
 
 function App() {
   return (
@@ -21,11 +22,12 @@ function App() {
         <Route Component={Login} path='/login/' />
         <Route Component={Dashboard} path='/dashboard/' />
         <Route Component={AllRecipes} path='/dashboard/all-recipes/' />
-        <Route Component={AllRecipesDetail} path='/dashboard/all-recipes/:id' />
         <Route Component={MyRecipes} path='/dashboard/my-recipes/' />
         <Route Component={FavoriteRecipes} path='/dashboard/favorite/' />
         <Route Component={Account} path='/dashboard/account/' />
-        <Route Component={CreateRecipes} path='/dashboard/my-recipes/create/' />
+        <Route Component={CreateRecipes} path='dashboard/recipe/create/'/>
+        <Route Component={EditRecipes} path='/dashboard/recipe/edit/:id/' />
+        <Route Component={ErrorPage} path='*' />
       </Routes>
     </BrowserRouter>
   );

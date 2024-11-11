@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DashboardNavbar from "../components/dashboardNavbar";
 
 const Account = () => {
@@ -10,7 +10,6 @@ const Account = () => {
     })
 
     return (<> 
-        <div className="w-screen h-screen bg-gray-300">
             <DashboardNavbar />
             <div className="">
                 <div className="mx-auto my-14 h-[500px] w-96 sm:w-[500px] md:w-[600px] bg-white px-16 sm:px-20 py-12 rounded-md shadow-2xl">
@@ -33,7 +32,6 @@ const Account = () => {
                     </div>
                 </div>
             </div>
-        </div>
      </>);
 }
  

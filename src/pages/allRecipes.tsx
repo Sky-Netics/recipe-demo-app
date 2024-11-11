@@ -38,7 +38,7 @@ const AllRecipes = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8">
                             {recipe.map((p,i)=>{
                                 return (
-                                    <Link to={`/dashboard/all-recipes/${i}?all-recipes`}>
+                                    <Link key={i} to={`/dashboard/all-recipes/${i}?all-recipes`}>
                                         <div className="shadow-2xl rounded p-4" key={i}>
                                             <div><img src="/images/meal.jpeg" alt={`meal_${i}`} /></div>
                                             <div>
@@ -59,7 +59,7 @@ const AllRecipes = () => {
                                                 </div>
                                                 <div className="flex justify-between items-center my-5">
                                                     <div>
-                                                        <Link className="text-white bg-carrot px-6 py-1 rounded-3xl" to="">American</Link>
+                                                        <p className="text-white bg-carrot px-6 py-1 rounded-3xl">American</p>
                                                     </div>
                                                     <div>
                                                         <Star stars={3}/>

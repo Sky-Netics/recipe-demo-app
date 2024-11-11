@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-import DashboardNavbar from "../components/dashboardNavbar";
 import Star from "../components/star";
+import DashboardNavbar from "../components/dashboardNavbar";
 
 
 const Dashboard = () => {
     const [recipe,setRecipe] = useState([{},{},{},{}])
 
 
-    return (
-        <>
+    return (<>
             <DashboardNavbar />
             <div className="xl:ml-60">
                 <div className="p-8">
@@ -28,7 +27,7 @@ const Dashboard = () => {
                             <div className="w-48 h-20 bg-gray-200 animate-pulse rounded"></div>
                         </div>
                         <div>
-                            <Link to={'/dashboard/my-recipes/create?my-recipes'} className="bg-carrot text-white py-1 px-2 rounded-xl flex items-center gap-1">
+                            <Link to={"/dashboard/recipe/create/"} className="bg-carrot cursor-pointer text-white py-1 px-2 rounded-xl flex items-center gap-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>

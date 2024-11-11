@@ -8,7 +8,9 @@ interface Recipes{
     title:string,
     country:string,
     rating:number,
-    people_served:number
+    people_served:number,
+    image_url:string,
+    cooking_time:string
 }
 
 const Recipes = () => {
@@ -64,15 +66,15 @@ const Recipes = () => {
                 {recipes.map((recipe,i)=>{
                     return (
                         <div className="shadow-2xl rounded p-4" key={i}>
-                            <div><img src="/images/meal.jpeg" alt={`meal_${i}`} /></div>
+                            <div><img className="w-full h-72 object-cover" src="/images/meal.jpeg" alt={`meal_${i}`} /></div>
                             <div>
-                                <p className="text-xl font-bold my-5">{recipe.title}</p>
+                                <p className="text-xl font-bold my-5">{recipe.title.substring(0,24)}...</p>
                                 <div className="flex justify-between">
                                     <div className="flex items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                         </svg>
-                                        <p>20 Minutes</p>
+                                        <p>{recipe.cooking_time}</p>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">

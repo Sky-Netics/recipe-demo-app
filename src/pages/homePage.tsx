@@ -15,7 +15,7 @@ const HomePage = () => {
                         <h1 className="text-3xl font-bold py-5 xl:text-5xl">Cook, Save and Share</h1>
                         <p>Taste Bite is a unique recipe sharing and discovery platform, where users can Save their favorite recipes in the app, create new ones and share them with friends.</p>
                         <div className="mt-10 mb-14">
-                            <Link className="bg-carrot px-16 py-2 rounded-xl" to={"/"}>Get Started</Link>
+                            <Link className="bg-carrot px-16 py-2 rounded-xl" to={"/dashboard"}>Get Started</Link>
                         </div>
                     </div>
                     <div>
