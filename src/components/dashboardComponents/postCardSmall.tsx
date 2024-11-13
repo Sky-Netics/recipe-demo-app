@@ -2,6 +2,7 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { PiCookingPot } from "react-icons/pi";
 import StarRating from '../../components/stars';
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PostCardSmall = () => {
 
@@ -28,6 +29,8 @@ const PostCardSmall = () => {
         <div className="flex flex-wrap">
         {
             postCardData.map((data:any)=>(
+                <Link to={`/dashboard/all-recipes/${data.id}`}>
+                
                 <div className="w-[250px] h-[320px] p-3 mx-4 mb-8 cursor-pointer rounded-md"
                     style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}}>
 
@@ -52,6 +55,7 @@ const PostCardSmall = () => {
                 </div>
 
                 </div>
+                </Link>
             ))
     }
         </div>

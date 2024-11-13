@@ -13,16 +13,10 @@ const AllRecipesComponent = ()=>{
 
             </div>
 
-
             <div className="flex flex-wrap justify-between mt-6"> 
-                        
-                        <Link to={'/dashboard/all-recipes/5'}>
-                            <PostCardSmall /> 
-                        </Link>
-                                                 
-                    </div>
+                <PostCardSmall />                                          
+            </div>
             
-
         </div>
     )
 }

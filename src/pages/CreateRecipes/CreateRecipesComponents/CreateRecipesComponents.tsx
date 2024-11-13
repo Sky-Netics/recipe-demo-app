@@ -34,7 +34,7 @@ const CreateRecipesComponent = () =>{
         setCountry('American')
         setCookingTime('20 minutes')
         setRating(3)
-        setImageUrl('https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+        setImageUrl('https://www.thespruceeats.com/thmb/7SC0hL8yeDFXc33yBTL-3pQD2hQ=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/kabob-koobideh-5224493-hero-01-5361a7c7978c459eb5b9801ebbcc8a22.jpg')
     }, [])
 
     const CreateRecipe = ()=>{
@@ -139,6 +139,7 @@ const CreateRecipesComponent = () =>{
                     >
                         <option value="American">American</option>
                         <option value="Italian">Italian</option>
+                        <option value="Iranian">Iranian</option>
                     </select>
                 </div>
 
