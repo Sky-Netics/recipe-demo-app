@@ -4,6 +4,7 @@ import { CiBookmark } from "react-icons/ci";
 import { FaFacebook, FaTwitter  } from "react-icons/fa";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 
 
@@ -12,25 +13,40 @@ import { Link } from 'react-router-dom';
 
 const SpecificRecipesComponent = ()=>{
 
+    const [specificRecipeData, setSpecificRecipeData] = useState<any>([])
+
     const path = window.location.pathname
     const id = path.split('/').pop();
-    console.log(id)
+    const apiUrl = `http://api.recipeapp.soroushsalari.com/recipes/recipes/${id}`
+    
+    fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setSpecificRecipeData(data)
+    })
+
+
 
     return(
         <div>
-
+            
             <div className="flex justify-between mx-auto w-[350px] mb-8  mt-[-20px]">
 
-                <h1 className="font-semibold  border-b-4 pb-2 px-1 border-carrot">step by step guide</h1>
-                <h1 className="font-semibold">video tutorial</h1>
+                <h1 className="font-semibold  border-b-4 pb-2 px-1 border-carrot cursor-pointer">step by step guide</h1>
+                <h1 className="font-semibold cursor-pointer">video tutorial</h1>
 
             </div>
+
+
+            {
+            
 
             <div className="flex pl-16 ">
 
             <div className="w-1/2">
                 <div className='flex flex-col items-center'>
-                    <img src={Food1} alt="food plate" className='w-[380px] h-[300px] object-cover rounded-md'/>
+                    <img src={specificRecipeData.image_url} alt="food plate" className='w-[380px] h-[300px] object-cover rounded-md'/>
                     
                     <div className='flex w-[400px] h-[55px] mt-4'>
                         
@@ -40,7 +56,7 @@ const SpecificRecipesComponent = ()=>{
                                 Servings
                             </p>
                             <p className='ml-6'>
-                                2
+                                {specificRecipeData.people_served}
                             </p>
                         </div>
 
@@ -49,16 +65,16 @@ const SpecificRecipesComponent = ()=>{
                                 Category
                             </p>
                             <p>
-                                Breakfast
+                                {specificRecipeData.category}
                             </p>
                         </div>
 
-                        <div className='flex flex-col mr-7'>
+                        <div className='flex flex-col mr-5 '>
                             <p className='font-semibold'>
                                 Cooking time
                             </p>
                             <p>
-                                5 Min
+                                {specificRecipeData.cooking_time}
                             </p>
                         </div>
 
@@ -67,7 +83,7 @@ const SpecificRecipesComponent = ()=>{
                                 Country
                             </p>
                             <p>
-                                Iran
+                                {specificRecipeData.country}
                             </p>
                         </div>
 
@@ -82,7 +98,7 @@ const SpecificRecipesComponent = ()=>{
 
                         <div>
                             <p className='font-bold text-[14px] mb-1'>Recipe creator</p>
-                            <p>amirmmdjf</p>
+                            <p>{specificRecipeData.user}</p>
                         </div>
 
                     </div>
@@ -108,24 +124,31 @@ const SpecificRecipesComponent = ()=>{
 
 
             <div className="w-1/2">
-                <h1 className='text-[30px] font-semibold'>Tagliata Alla Fiorentina</h1>
+                <h1 className='text-[30px] font-semibold'>{specificRecipeData.title}</h1>
             
                 <h2 className='font-bold mt-7 text-[20px]'>Ingredients</h2>
 
                 <ul className='list-disc ml-4 mt-2'>
-                    <li >1/2 teaspon salt</li>
+                {specificRecipeData.ingredients && specificRecipeData.ingredients.map((item: any, index: number) => (
+                    <li key={index}>{item}</li>
+                ))}
+                    
                 </ul>
 
-                <h2 className='font-bold mt-7 text-[20px]'>Procedure</h2>
+                <h2 className='font-bold mt-8 text-[20px]'>Procedure</h2>
                 
-                <h3 className='font-bold mt-4'>Step1</h3>
-                <p className='mt-4'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-
+                {specificRecipeData.procedure && specificRecipeData.procedure.map((item: any, index: number) => (
+                    <div key={index}>
+                    <h3 className='font-bold mt-4'>Step {index + 1}</h3>
+                    <p className='mt-2'>{item}</p>
+                    </div>
+                ))}
+                
             </div>
 
             </div>
-
-
+  
+        }
 
         </div>
     )

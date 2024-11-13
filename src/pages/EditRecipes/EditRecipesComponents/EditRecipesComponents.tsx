@@ -23,8 +23,8 @@ const EditRecipesComponent = () => {
     const [rating, setRating] = useState<number>(0)
     const [videoTutorialURL, setVideoTutorialURL] = useState<string>('')
     const [imageUrl, setImageUrl] = useState<string>('')
-    const [ingredients, setIngredients] = useState<any>([""])
-    const [procedure, setProcedure] = useState<any>([""])
+    const [ingredients, setIngredients] = useState<string[]>([]);
+    const [procedure, setProcedure] = useState<string[]>([]);
 
 
 
@@ -205,17 +205,19 @@ const EditRecipesComponent = () => {
                     <input type="text" 
                     className="border-2 placeholder-gray-600 py-1 px-6 mt-3 w-[320px]"
                     placeholder="step1"
-                    onChange={(e) => setIngredients(e.target.value)}
+                    onChange={(e) => setIngredients(prev => [...prev, e.target.value])}
                     />
 
                     <input type="text" 
                     className="border-2 placeholder-gray-600 py-1 px-6 mt-3 w-[320px]"
                     placeholder="step2"
+                    onChange={(e) => setIngredients(prev => [...prev, e.target.value])}
                     />
 
                 <input type="text" 
                     className="border-2 placeholder-gray-600 py-1 px-6 mt-3 w-[320px]"
                     placeholder="step3"
+                    onChange={(e) => setIngredients(prev => [...prev, e.target.value])}
                 />
 
                 <button className="w-2/6 mt-3 py-2 rounded-3xl border-2 text-carrot font-semibold border-carrot">Add ingredient</button>
@@ -229,17 +231,19 @@ const EditRecipesComponent = () => {
                     <input type="text" 
                     className="border-2 placeholder-gray-600 py-1 px-6 mt-3 w-[320px]"
                     placeholder="step1"
-                    onChange={(e)=>setProcedure(e.target.value)}
+                    onChange={(e) => setIngredients(prev => [...prev, e.target.value])}
                     />
 
                     <input type="text" 
                     className="border-2 placeholder-gray-600 py-1 px-6 mt-3 w-[320px]"
                     placeholder="step2"
+                    onChange={(e) => setIngredients(prev => [...prev, e.target.value])}
                     />
 
                 <input type="text" 
                     className="border-2 placeholder-gray-600 py-1 px-6 mt-3 w-[320px]"
                     placeholder="step3"
+                    onChange={(e) => setIngredients(prev => [...prev, e.target.value])}
                     />
 
                 <button className="w-2/6 mt-3 py-2 rounded-3xl border-2 text-carrot font-semibold border-carrot">Add Procedure</button>

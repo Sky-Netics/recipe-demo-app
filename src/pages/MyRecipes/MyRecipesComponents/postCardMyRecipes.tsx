@@ -12,12 +12,12 @@ const PostCardMyRecipes = ()=>{
     const [postCardData, setPostCardData] = useState<any[]>([])
 
     useEffect(()=>{
-        const apiUrl = 'http://api.recipeapp.soroushsalari.com//recipes/my-recipes'
+        const editApiUrl = 'http://api.recipeapp.soroushsalari.com/recipes/my-recipes'
         const tokenData = localStorage.getItem('access-token')
         const token = tokenData ? JSON.parse(tokenData).token : '';
 
         
-        fetch(apiUrl, {
+        fetch(editApiUrl, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,6 +35,26 @@ const PostCardMyRecipes = ()=>{
             
     }, [])
 
+
+    function deleteRecipe(id:number|string){
+        const deleteApiUrl = `http://api.recipeapp.soroushsalari.com/recipes/recipes/${id}`
+        const tokenData = localStorage.getItem('access-token')
+        const token = tokenData ? JSON.parse(tokenData).token : '';
+
+        fetch(deleteApiUrl,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }})
+        .then(data => {
+            setPostCardData(prevData => prevData.filter(recipe => recipe.id !== id));
+            window.location.reload();
+        })
+        .catch(err => {
+            console.log("Error deleting recipe:", err);
+        });
+        } 
     
 
         return (
@@ -42,10 +62,12 @@ const PostCardMyRecipes = ()=>{
             <>
                 { postCardData.map((recipesData:any)=>(
 
-                <div className="w-[250px] h-[380px] p-3 mx-3 mb-8 rounded-md"
+                <div key={recipesData.id} className="w-[250px] h-[380px] p-3 mx-3 mb-8 rounded-md"
                     style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}}>
         
-                    <img src={recipesData.image_url} alt={recipesData.title} className="w-full h-[150px] rounded object-cover" />
+                    <Link to={`http://localhost:3000/dashboard/all-recipes/${recipesData.id}`}>
+                        <img src={recipesData.image_url} alt={recipesData.title} className="w-full h-[150px] rounded object-cover" />                    
+                    </Link>
         
                     <h2 className="text-[18px] font-bold mt-4">{recipesData.title}</h2>
         
@@ -62,7 +84,7 @@ const PostCardMyRecipes = ()=>{
         
                     <div className='flex justify-between  mt-4'>
                         <h3 className='bg-carrot text-white text-[14px] flex items-center px-[28px] h-[30px] my-auto rounded-2xl font-semibold'>{recipesData.country}</h3>
-                        <StarRating starsCount={5} style=''/>
+                        <StarRating starsCount={recipesData.rating} style=''/>
                     </div>
                 
                     <div className="flex justify-between py-6 text-[14px]">
@@ -73,7 +95,10 @@ const PostCardMyRecipes = ()=>{
                              </button>
                         </Link>
                         
-                        <button className="flex items-center bg-[#ff0000] text-white px-3 rounded-md py-1.5"> <RiDeleteBin6Line className="mr-3"/> Delete </button>
+                        <button 
+                        onClick={()=>deleteRecipe(recipesData.id)}
+                        className="flex items-center bg-[#ff0000] text-white px-3 rounded-md py-1.5"
+                        > <RiDeleteBin6Line className="mr-3"/> Delete </button>
 
                     </div>
         

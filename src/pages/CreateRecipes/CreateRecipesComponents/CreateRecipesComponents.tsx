@@ -74,6 +74,7 @@ const CreateRecipesComponent = () =>{
                     throw new Error('Network response was not ok: ' + response.statusText + '. Response: ' + text);
                 });
             }
+            window.location.href = '/dashboard/my-recipes'
             return response.json();
         })
         .then(data => {
@@ -244,7 +245,7 @@ const CreateRecipesComponent = () =>{
                 </div>
 
                 </div> 
-            </div>
+                </div>
             
             </div>
 
