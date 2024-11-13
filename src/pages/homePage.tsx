@@ -22,7 +22,27 @@ const HomePage = () => {
                         <img src={"/images/FoodPlate.54cc01f110926cd645cb.png"} alt="salad" />
                     </div>
                 </div>
-                <Recipes />
+                <div id="recipes" className="mt-14 mb-12">
+                    <p className="recipes-topic mb-3">Popular Recipes</p>
+                    <div className="flex items-center justify-center md:justify-between gap-8">
+                        <div className="w-28 hidden md:block"></div>
+                        <div className="flex gap-8">
+                            <p className="cursor-pointer border-b-2 border-carrot">All</p>
+                            <p className="cursor-pointer">Breakfast</p>
+                            <p className="cursor-pointer">Lunch</p>
+                            <p className="cursor-pointer">Supper</p>
+                        </div>
+                        <Link to={"/recipes"} className="hidden md:flex gap-2 items-center text-carrot w-28 underline">
+                            <p>See more</p>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                                </svg>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+                <Recipes pagination={1}/>
                 <Tastebite />
                 <Carousel />
                 <div className="w-full bg-carrot rounded-lg text-white text-center px-2 py-12 sm:px-8 md:px-24 lg:px-32 xl:px-40 relative top-16">

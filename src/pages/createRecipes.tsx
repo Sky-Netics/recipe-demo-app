@@ -1,26 +1,15 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import DashboardNavbar from "../components/dashboardNavbar";
-
-
-interface Recipes {
-    title:string,
-    country:string,
-    rating:number,
-    people_served:number,
-    ingredients:string[],
-    procedure:string[],
-    category:string,
-    cooking_time:string,
-    image_url:"https://picsum.photos/200/300",
-    video_link:"https://picsum.photos/200/300"
-}
+import RecipesType from "../interfaces/recipeInterface";
 
 
 const CreateRecipes = () => {
     const redirect = useNavigate();
 
-    const [newRecipes,setNewRecipes] = useState<Recipes>({
+    const [newRecipes,setNewRecipes] = useState<RecipesType>({
+        id:0,
         title:"",
         country:"",
         rating:0,
@@ -30,7 +19,9 @@ const CreateRecipes = () => {
         category:"",
         cooking_time:"",
         image_url:"https://picsum.photos/200/300",
-        video_link:"https://picsum.photos/200/300"
+        video_link:"https://picsum.photos/200/300",
+        user_id:0,
+        user:""
     })
     const [disable,setDisable] = useState(false);
     const [error,setError] = useState([]);
@@ -63,7 +54,7 @@ const CreateRecipes = () => {
             body:JSON.stringify(newRecipes)
         })
         if (response.status===201){
-            redirect("/dashboard")
+            redirect("/dashboard/my-recipes?my-recipes")
         }else{
             const result = await response.json();
             setError(result.errors)

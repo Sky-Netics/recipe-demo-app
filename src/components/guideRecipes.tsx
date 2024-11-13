@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import Recipes from "../interfaces/recipeInterface";
+import { useParams } from "react-router-dom";
 
 const GuideRecipes = () => {
+    const id:string|undefined = useParams().id
+    const domain:string = "http://api.recipeapp.soroushsalari.com/";
 
-    const [steps,setSteps] = useState([{},{},{},{}])
+    const [recipe,setRecipe] = useState<Recipes>();
+    const [steps,setStep] = useState([{},{},{},{}])
 
+    useEffect(()=>{
+        fetchData();
+    },[]) 
+    const fetchData = async()=>{
+        const response = await fetch(`${domain}/recipes/recipes/${id}`,{method:"GET"})
+        if (response.status===200){
+            const result = await response.json();
+            setRecipe(result);
+        }
+    }
 
     return ( 
-        <div className="py-10 px-10 md:px-5 md:grid md:grid-cols-[3fr_4fr] md:gap-10 xl:gap-0">
+        <div className="py-10 px-10 md:px-5 md:grid md:grid-cols-[3fr_4fr] gap-10">
             <div>
-                <div><img className="rounded-2xl w-96" src="/images/Rectangle.png" alt="recipes" /></div>
+                <div><img className="rounded-2xl w-96" src={recipe?.image_url} alt="recipes" /></div>
                 <div>
                     <div className="grid grid-cols-4 mt-4">
                         <p>Serving</p>
@@ -17,10 +32,10 @@ const GuideRecipes = () => {
                         <p className="ml-6">Country</p>
                     </div>
                     <div className="grid grid-cols-4 mt-2">
-                        <p>2</p>
-                        <p>Breakfast</p>
-                        <p>5 Min</p>
-                        <p className="ml-4">Kenya</p>
+                        <p>{recipe?.people_served}</p>
+                        <p>{recipe?.category}</p>
+                        <p>{recipe?.cooking_time} Minutes</p>
+                        <p className="ml-4">{recipe?.category}</p>
                     </div>
                 </div>
                 <div className="flex gap-10 mt-10">
@@ -32,7 +47,7 @@ const GuideRecipes = () => {
                     </div>
                     <div className="w-32">
                         <p className="font-bold">Recipe Creator</p>
-                        <p>Chizaa</p>
+                        <p>{recipe?.user}</p>
                     </div>
                 </div>
                 <div>
@@ -45,8 +60,8 @@ const GuideRecipes = () => {
                         </div>
                         <div>
                             <svg className="cursor-pointer" width="27" height="27" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_89_1246)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 16.0893C0 24.044 5.77733 30.6587 13.3333 32V20.444H9.33333V16H13.3333V12.444C13.3333 8.444 15.9107 6.22267 19.556 6.22267C20.7107 6.22267 21.956 6.4 23.1107 6.57733V10.6667H21.0667C19.1107 10.6667 18.6667 11.644 18.6667 12.8893V16H22.9333L22.2227 20.444H18.6667V32C26.2227 30.6587 32 24.0453 32 16.0893C32 7.24 24.8 0 16 0C7.2 0 0 7.24 0 16.0893Z" fill="#FF785B"/>
+                                <g clipPath="url(#clip0_89_1246)">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M0 16.0893C0 24.044 5.77733 30.6587 13.3333 32V20.444H9.33333V16H13.3333V12.444C13.3333 8.444 15.9107 6.22267 19.556 6.22267C20.7107 6.22267 21.956 6.4 23.1107 6.57733V10.6667H21.0667C19.1107 10.6667 18.6667 11.644 18.6667 12.8893V16H22.9333L22.2227 20.444H18.6667V32C26.2227 30.6587 32 24.0453 32 16.0893C32 7.24 24.8 0 16 0C7.2 0 0 7.24 0 16.0893Z" fill="#FF785B"/>
                                 </g>
                                 <defs>
                                 <clipPath id="clip0_89_1246">
@@ -64,29 +79,23 @@ const GuideRecipes = () => {
                 </div>
             </div>
             <div className="hidden md:block">
-                <p className="text-lg font-bold my-5">Tagliata Alla Fiorentina</p>
+                <p className="text-lg font-bold my-5">{recipe?.title}</p>
                 <p className="font-bold mb-1">Ingredients</p>
                 <ul className="list-disc grid grid-cols-2 text-sm space-y-1 ml-5">
-                    <li>One 15-ounce can pumpkin</li>
-                    <li>1/2 cup packed brown sugar</li>
-                    <li>1/2 teaspoon ground cinnamon</li>
-                    <li>1/2 teaspoon salt</li>
-                    <li>1/4 teaspoon ground ginger</li>
-                    <li>1/4 teaspoon ground nutmeg</li>
-                    <li>2/3 cup butter, melted</li>
-                    <li>1 cup chopped pecans</li>
+                    {recipe?.ingredients.map((ingredient,i)=>{
+                        return(<li key={i}>{ingredient}</li>)
+                    })}
                 </ul>
                 <div className="space-y-4">
-                <p className="font-bold mt-5">Procedure</p>
-                {steps.map((step,i)=>{
-                    return (
-                    <div key={i}>
-                        <p className="text-sm font-bold">step {i+1}</p>
-                        <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        . Lacinia condimentum egestas et arcu quis et arcu</p>
-                    </div>)
-                })}
-            </div>
+                    <p className="font-bold mt-5">Procedure</p>
+                    {recipe?.procedure.map((step,i)=>{
+                        return (
+                        <div key={i}>
+                            <p className="text-sm font-bold">step {i+1}</p>
+                            <p className="text-sm">{step}</p>
+                        </div>)
+                    })}
+                </div>
             </div>
         </div>
      );

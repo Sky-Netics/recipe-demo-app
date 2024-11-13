@@ -1,12 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Star from "../components/star";
 import DashboardNavbar from "../components/dashboardNavbar";
-
+import RecipesType from "../interfaces/recipeInterface";
 
 const AllRecipes = () => {
-    const [recipe,setRecipe] = useState([{},{},{},{},{},{},{},{}])
+    const domain:string = "http://api.recipeapp.soroushsalari.com";
+
+    const [recipes,setRecipes] = useState<RecipesType[]>([]);
+    const [loading,setLoading] = useState(true);
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const response = await fetch(`${domain}/recipes/recipes?page=1&per_page=8`,{
+                method:"GET",
+                headers:{
+                'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('access_token')}`
+                }
+            })
+            if(response.status === 200){
+                let result = await response.json();
+                setRecipes(result.items)
+                setLoading(false)
+            }
+        }
+        fetchData()
+    },[])
 
     return ( 
         <>
@@ -35,12 +56,12 @@ const AllRecipes = () => {
                     </div>
                     <div>
                         <p className="font-extrabold">All Recipes</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8">
-                            {recipe.map((p,i)=>{
+                        <div className="dashboard-recipes">
+                            {recipes.map((p,i)=>{
                                 return (
-                                    <Link key={i} to={`/dashboard/all-recipes/${i}?all-recipes`}>
+                                    <Link key={i} to={`/dashboard/recipe/${i}?all-recipes`}>
                                         <div className="shadow-2xl rounded p-4" key={i}>
-                                            <div><img src="/images/meal.jpeg" alt={`meal_${i}`} /></div>
+                                            <div><img className="recipe-img" src={p.image_url} alt={`meal_${i}`} /></div>
                                             <div>
                                                 <p className="text-xl font-bold my-5">HomeMade Potato Chips</p>
                                                 <div className="flex justify-between">

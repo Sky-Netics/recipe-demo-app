@@ -6,13 +6,13 @@ const Star = ({stars}:{stars:number}) => {
 
         for (let index = 0; index < stars; index++){ 
             starElements.push(
-                <img className="object-cover" src="/images/Star.png" key={index} alt={`star${index}`} />
+                <img className="object-cover size-5" src="/images/Star.png" key={index} alt={`star${index}`} />
             ); 
         }
         if (countEmpty!==0){
             for (let i = 0; i < countEmpty; i++){ 
                 starElements.push(
-                    <img src="/vectors/emptyStar.svg" key={i+5} alt={`empty${i}`} />
+                    <img src="/vectors/emptyStar.svg" className="size-5" key={i+5} alt={`empty${i}`} />
                 );
             }   
         }

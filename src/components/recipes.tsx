@@ -1,27 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Star from "./star";
 import { useEffect, useState } from "react";
 import Skeleton from "./skeleton";
 
+import RecipesType from "../interfaces/recipeInterface";
 
-interface Recipes{
-    title:string,
-    country:string,
-    rating:number,
-    people_served:number,
-    image_url:string,
-    cooking_time:string
-}
-
-const Recipes = () => {
+const Recipes = ({pagination}:{pagination:number}) => {
     const domain:string = "http://api.recipeapp.soroushsalari.com"
 
-    const [recipes,setRecipes] = useState<Recipes[]>([]);
+    const [recipes,setRecipes] = useState<RecipesType[]>([]);
     const [loading,setLoading] = useState(true);
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`${domain}/recipes/recipes?page=1&per_page=8`,{
+            const response = await fetch(`${domain}/recipes/recipes?page=${pagination}&per_page=8`,{
                 method:"GET",
                 headers:{
                 'Content-Type': 'application/json',
@@ -29,47 +21,34 @@ const Recipes = () => {
                 }
             })
             if(response.status === 200){
-                let respone = await response.json();
-                let result:Recipes[] = respone.items
-                setRecipes(result)
+                let result = await response.json();
+                setRecipes(result.items)
                 setLoading(false)
             }
         }
         fetchData()
-    },[])
+    },[pagination])
 
     return ( 
             <div>
-                <div id="recipes" className="mt-14 mb-12">
-                    <p className="recipes-topic mb-3">Popular Recipes</p>
-                    <div className="flex items-center justify-center md:justify-between gap-8">
-                        <div className="w-28 hidden md:block"></div>
-                        <div className="flex gap-8">
-                            <p className="cursor-pointer border-b-2 border-carrot">All</p>
-                            <p className="cursor-pointer">Breakfast</p>
-                            <p className="cursor-pointer">Lunch</p>
-                            <p className="cursor-pointer">Supper</p>
-                        </div>
-                        <div className="hidden md:flex gap-2 items-center text-carrot w-28 underline">
-                            <p>See more</p>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 {loading ? 
                     <Skeleton count={4}/>
                 : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8 mb-16">
                 {recipes.map((recipe,i)=>{
                     return (
                         <div className="shadow-2xl rounded p-4" key={i}>
-                            <div><img className="w-full h-72 object-cover" src="/images/meal.jpeg" alt={`meal_${i}`} /></div>
+                            <div><img className="recipe-img" src={recipe.image_url} alt={`meal_${i}`} /></div>
                             <div>
-                                <p className="text-xl font-bold my-5">{recipe.title.substring(0,24)}...</p>
-                                <div className="flex justify-between">
+                                <div className="flex justify-between items-center my-2">
+                                    <div className="text-white bg-carrot inline px-6 h-7 rounded-3xl">{recipe.country}</div>
+                                    <div className="w-10 h-10 flex items-center justify-center shadow-black shadow-2xl rounded-full cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-carrot size-6">
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p className="text-xl font-bold my-2">{recipe.title.substring(0,24)}...</p>
+                                <div className="flex gap-4">
                                     <div className="flex items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -83,10 +62,7 @@ const Recipes = () => {
                                         <p>{recipe.people_served} Servings</p>
                                     </div>
                                 </div>
-                                <div className="flex justify-between items-center my-5">
-                                    <div>
-                                        <Link className="text-white bg-carrot px-6 py-1 rounded-3xl" to="/">{recipe.country}</Link>
-                                    </div>
+                                <div className="flex justify-between items-center my-2">
                                     <div>
                                         <Star stars={Math.ceil(recipe.rating)}/>
                                     </div>

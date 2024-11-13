@@ -31,4 +31,10 @@ code {  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   .active-header{
     @apply border-b-4 border-carrot;
   }
+  .recipe-img{
+    @apply w-full h-72 ;
+  }
+  .dashboard-recipes{
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8;
+  }
 }

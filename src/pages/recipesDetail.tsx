@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom";
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 
-import GuideRecipes from "./guideRecipes";
-import VideoRecipes from "./videoRecipes";
+import GuideRecipes from "../components/guideRecipes";
+import VideoRecipes from "../components/videoRecipes";
+import DashboardNavbar from "../components/dashboardNavbar";
 
 const RecipesDetail = () => {
-    const id:string|undefined = useParams().id
+    const domain:string = "http://api.recipeapp.soroushsalari.com/"
 
     const [status,setStatus] = useState("guide");
     
     const video = useRef<HTMLParagraphElement|null>(null)
     const guide = useRef<HTMLParagraphElement|null>(null)
-    
+
     const guideORvideo = ():React.ReactNode =>{
         if (status==="guide"){
             return <GuideRecipes />
@@ -33,6 +33,7 @@ const RecipesDetail = () => {
     }
 
     return (<>
+            <DashboardNavbar />
             <div className="xl:ml-60 flex flex-col items-center mt-5">
                 <div className="flex gap-12">
                     <p ref={guide} onClick={()=>{changeComponent("guide")}} className="cursor-pointer active-header">Step by step guide</p>

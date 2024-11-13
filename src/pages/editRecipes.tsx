@@ -1,33 +1,23 @@
 import { useEffect, useRef,useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DashboardNavbar from "./dashboardNavbar";
 
+import DashboardNavbar from "../components/dashboardNavbar";
+import RecipesType from "../interfaces/recipeInterface";
 
-interface Recipes {
-    title:string,
-    country:string,
-    rating:number,
-    people_served:number,
-    ingredients:string[],
-    procedure:string[],
-    category:string,
-    cooking_time:string,
-    image_url:"https://picsum.photos/200/300",
-    video_link:"https://picsum.photos/200/300"
-}
 
 const EditRecipes = () => {
     const id = useParams().id
 
     const redirect = useNavigate();
 
-    const domain:string = "http://192.168.1.113:5000/"
+    const domain:string = "http://api.recipeapp.soroushsalari.com/";
 
     const message = useRef<HTMLDivElement|null>(null);
     const procedureInput = useRef<HTMLInputElement|null>(null);
     const ingredientInput = useRef<HTMLInputElement|null>(null);
 
-    const [newRecipes,setNewRecipes] = useState<Recipes>({
+    const [newRecipes,setNewRecipes] = useState<RecipesType>({
+        id:0,
         title:"",
         country:"",
         rating:0,
@@ -37,7 +27,9 @@ const EditRecipes = () => {
         category:"",
         cooking_time:"",
         image_url:"https://picsum.photos/200/300",
-        video_link:"https://picsum.photos/200/300"
+        video_link:"https://picsum.photos/200/300",
+        user_id:0,
+        user:""
     })
     const [disable,setDisable] = useState(true);
     const [error,setError] = useState([]);
@@ -55,6 +47,9 @@ const EditRecipes = () => {
         })
         if (response.status === 200){
             const result = await response.json();
+            delete result.id
+            delete result.user
+            delete result.user_id
             setNewRecipes(result);
         }
     }
@@ -64,13 +59,13 @@ const EditRecipes = () => {
         const response = await fetch(`${domain}recipes/recipes/${id}`,{
             method:"PATCH",
             headers:{
-                'Content-Type': 'application/json',
+                'Content-Type' : 'application/json',
                 "Authorization":`Bearer ${localStorage.getItem("access_token")}`
             },
             body:JSON.stringify(newRecipes)
         })
         if (response.status===200){
-            redirect("/dashboard")
+            redirect("/dashboard/my-recipes?my-recipes")
         }else{
             const result = await response.json();
             setError(result.errors)

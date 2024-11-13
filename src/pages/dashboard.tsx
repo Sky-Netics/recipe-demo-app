@@ -1,12 +1,36 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import Star from "../components/star";
 import DashboardNavbar from "../components/dashboardNavbar";
+import Skeleton from "../components/skeleton";
+import RecipesType from "../interfaces/recipeInterface";
 
 
 const Dashboard = () => {
-    const [recipe,setRecipe] = useState([{},{},{},{}])
+    const domain:string = "http://api.recipeapp.soroushsalari.com"
+
+    const [recipes,setRecipes] = useState<RecipesType[]>([]);
+    const [loading,setLoading] = useState(true);
+
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const response = await fetch(`${domain}/recipes/recipes?page=1&per_page=8`,{
+                method:"GET",
+                headers:{
+                'Content-Type': 'application/json',
+                "Authorization":`Bearer ${localStorage.getItem('access_token')}`
+                }
+            })
+            if(response.status === 200){
+                let resutl = await response.json();
+                setRecipes(resutl.items)
+                setLoading(false)
+            }
+        }
+        fetchData()
+    },[])
 
 
     return (<>
@@ -37,11 +61,14 @@ const Dashboard = () => {
                     </div>
                     <div>
                         <p className="font-extrabold">Popular Recipes</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8">
-                            {recipe.map((p,i)=>{
+                        {loading ? 
+                            <Skeleton count={4}/>
+                        :
+                        <div className="dashboard-recipes">
+                            {recipes.map((p,i)=>{
                                 return (
-                                    <div className="shadow-2xl rounded p-4" key={i}>
-                                        <div><img src="/images/meal.jpeg" alt={`meal_${i}`} /></div>
+                                    <Link to={`/dashboard/recipe/${p.id}?dashboard`} className="shadow-2xl rounded p-4" key={i}>
+                                        <div><img className="recipe-img" src={p.image_url} alt={`meal_${i}`} /></div>
                                         <div>
                                             <p className="text-xl font-bold my-5">HomeMade Potato Chips</p>
                                             <div className="flex justify-between">
@@ -60,17 +87,18 @@ const Dashboard = () => {
                                             </div>
                                             <div className="flex justify-between items-center my-5">
                                                 <div>
-                                                    <Link className="text-white bg-carrot px-6 py-1 rounded-3xl" to="">American</Link>
+                                                    <div className="text-white bg-carrot px-6 py-1 rounded-3xl" >American</div>
                                                 </div>
                                                 <div>
                                                     <Star stars={3}/>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 )
                             })}
                         </div>
+                        }
                     </div>
                 </div>
             </div>
